@@ -11,7 +11,7 @@ description: Generates an illustrated HTML page about any topic. Triggered by re
 
 ## 依存
 
-パスはリポジトリルートからの絶対パスで扱うこと。
+パスはリポジトリのルートからのパスで扱うこと。
 
 - `.claude/skills/creating-visual-explainers/references/base.html` — 図解テンプレート（Tailwind CSS CDN・Lucide Icons CDN・ABiL Lab 配色を含む「額縁」）
 - `.claude/skills/creating-visual-explainers/references/model-answer.html` — 模範回答（品質基準・デザインパターンの実例）
@@ -102,7 +102,7 @@ Step 3 で収集した情報をもとに、図解HTMLを生成する。資料・
    バージョン番号が表示された → 次へ。
    `command not found` と表示された → `.claude/skills/creating-visual-explainers/references/node-install-guide.md` の手順に従ってNode.jsのインストールを案内する。
 
-2. surge にログイン済みかを確かめる（`npx --yes surge whoami`）。メールアドレスが表示されたら設定済みなので 3 へ。表示されなければ、**AI がログインを代わりに実行せず**、ユーザーに次を伝えて、終わったと言われるまで待つ:
+2. surge にログイン済みかを確かめる（`npx --yes surge whoami </dev/null`。入力待ちで止まらないように、入力を空にしておく）。メールアドレスが表示されたら設定済みなので 3 へ。表示されなければ、**AI がログインを代わりに実行せず**、ユーザーに次を伝えて、終わったと言われるまで待つ:
 
    > 最初に一度だけ、図を置くサービス（surge）のアカウントを作ります。
    > **パスワードはこのチャット欄に打たないでください。** チャット欄に打った文字は AI に送られ、会話の記録にも残ります。
@@ -114,11 +114,11 @@ Step 3 で収集した情報をもとに、図解HTMLを生成する。資料・
    >
    > 終わったら、このチャット欄で「設定できた」と教えてください。
 
-3. URL に入れる名前を決める。`.diagram-tool/name` が無ければ、ユーザーに「公開 URL に入れる名前（ローマ字・例: ueda）」を聞く。公開 URL に出る文字なので、本人が決めた文字だけを使う。初回の公開で `--name` に渡すと `.diagram-tool/name` に覚え、次からは聞かない
+3. URL に入れる名前を決める。`.diagram-tool/name` が無ければ、ユーザーに「公開 URL に入れる名前（ローマ字・例: taro）」を聞く。公開 URL に出る文字なので、本人が決めた文字だけを使う。初回の公開で `--name` に渡すと `.diagram-tool/name` に覚え、次からは聞かない
 
 #### 公開の実行
 
-公開 URL の形は `https://diagram-{スラッグ}-{名前}-{ランダム4文字}.surge.sh`（例: `https://diagram-git-ueda-k3x9.surge.sh`）。ランダムの 4 文字は、題名から URL を当てられないように、また同じ題名の図を別の人が公開しても名前がぶつからないように付く。**同じスラッグの図を公開し直すと、前と同じ URL を使い回す**（`.diagram-tool/domains.tsv` に覚えている）。ユーザーが「URL を変えたい」と言ったときだけ `--new-url` を付ける。
+公開 URL の形は `https://diagram-{スラッグ}-{名前}-{ランダム4文字}.surge.sh`（例: `https://diagram-git-taro-k3x9.surge.sh`）。ランダムの 4 文字は、題名から URL を当てられないように、また同じ題名の図を別の人が公開しても名前がぶつからないように付く。**同じスラッグの図を公開し直すと、前と同じ URL を使い回す**（`.diagram-tool/domains.tsv` に覚えている）。ユーザーが「URL を変えたい」と言ったときだけ `--new-url` を付ける。
 
 **macOS / Git Bash（Windows）の場合:**
 
@@ -150,7 +150,7 @@ if ($LASTEXITCODE -eq 0) { if (-not ((Test-Path $map) -and (Select-String -Quiet
 よくあるエラーと対応:
 
 - **`npx: command not found`** — Node.js がまだ入っていない。`.claude/skills/creating-visual-explainers/references/node-install-guide.md` の手順を案内する
-- **`surge: not found` / surge関連エラー** — `npm install -g surge` を実行してから再度試す
+- **`surge: not found` / surge関連エラー** — `npx --yes surge --version` で surge が動くかを確かめ、動けばもう一度公開する
 - **認証エラー / `Login required` / 「公開できませんでした」** — 「最初の設定」がまだ。上の 2 の文面を伝え、ユーザーが**自分のターミナルのアプリで** `npx surge login` を実行するのを待つ（パスワードをチャット欄に打たせない）
 - **ドメインが他の人に使われている** — まれにランダムの 4 文字までぶつかったとき。`--new-url` を付けて公開し直す
 - **その他** — エラーの内容を読み、「何が問題で」「次に何をすればいいか」を平易に説明する
@@ -164,48 +164,6 @@ if ($LASTEXITCODE -eq 0) { if (-not ((Test-Path $map) -and (Select-String -Quiet
 2. `npx surge teardown [ドメイン]` を実行する
 3. `.diagram-tool/domains.tsv` からその行を消す（次に同じ図を公開したら新しい URL になる）
 4. 削除完了をユーザーに伝える。あわせて「消せるのは surge に置いた本体だけで、誰かが保存した写しやスクショは消せない」ことも一言添える
-
-### Step 6.5: インデックス更新（デプロイ成功後のみ）
-
-デプロイに成功した場合のみ、`output/index.html` を更新する。
-
-#### 更新手順
-
-1. `output/index.html` を読む
-2. `<!-- ===== 図解HTML ===== -->` セクション内の `section-count` の件数を **+1** する
-3. 同セクションの `card-grid` の末尾に、以下のカードHTMLを追加する:
-
-```html
-<a class="card diagram" href="{スラッグ}.html">
-  <div class="card-top">
-    <div class="card-icon">{内容に合った絵文字1文字}</div>
-    <div class="card-name">{図解のタイトル（日本語）}</div>
-  </div>
-  <div class="card-meta">
-    <span class="card-tag tag-diagram">図解</span>
-    {スラッグ}.html
-  </div>
-  <a class="card-deploy" href="https://{公開したドメイン}" target="_blank" onclick="event.stopPropagation()">
-    <span class="card-deploy-icon">↗</span> {公開したドメイン}
-  </a>
-</a>
-```
-
-4. ファイルを保存する
-
-#### 絵文字の選び方
-
-図解のトピックを一言で表す絵文字を1つ選ぶ。迷ったら以下を参考に:
-
-| トピック系統 | 絵文字例 |
-|---|---|
-| 技術・開発ツール | 🤖 ⚙️ 💻 🛠️ |
-| ビジネス・マーケティング | 📊 📈 💼 🎯 |
-| 学習・教育 | 📚 🎓 💡 |
-| 医療・健康・美容 | 💆 🏥 ✨ |
-| 飲食・サービス | 🍽️ ☕ 🏪 |
-| スポーツ・趣味 | 🏓 ⚽ 🎮 |
-| コミュニケーション | 💬 📣 📱 |
 
 ### Step 7: 完了報告
 

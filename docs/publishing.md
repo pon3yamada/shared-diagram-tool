@@ -43,7 +43,7 @@ if ! npx --yes surge "$TEMP_DIR" --domain "$DOMAIN" </dev/null; then
     DOMAIN="diagram-${SLUG}-${NAME}-${RAND}.surge.sh"
 ```
 
-たとえば `diagram-git-ueda-k3x9.surge.sh` です（`git` = 図の題名、`ueda` = 自分の名前、`k3x9` = ランダムな 4 文字）。ランダムな 4 文字は、題名から URL を当てられにくくするためと、同じ題名の図をほかの人が公開したときに名前がぶつからないようにするためのものです。**パスワードの代わりにはなりません**（URL が伝われば、誰でも開けます）。
+たとえば `diagram-git-taro-k3x9.surge.sh` です（`git` = 図の題名、`taro` = 自分の名前、`k3x9` = ランダムな 4 文字）。ランダムな 4 文字は、題名から URL を当てられにくくするためと、同じ題名の図をほかの人が公開したときに名前がぶつからないようにするためのものです。**パスワードの代わりにはなりません**（URL が伝われば、誰でも開けます）。
 
 ## 検索よけ その 1: 雛形 HTML の `<meta name="robots">`
 
@@ -117,7 +117,7 @@ Slack などに URL を貼ると、図解の題名と説明文がプレビュー
 公開したページは、次で消せます。
 
 ```bash
-npx surge teardown diagram-git-ueda-k3x9.surge.sh
+npx surge teardown diagram-git-taro-k3x9.surge.sh
 ```
 
 ただし、

@@ -72,7 +72,7 @@ fi
 NAME="$(to_label "$NAME" 16)"
 if [ -z "$NAME" ]; then
     echo -e "${RED}エラー: URL に入れる名前が決まっていません${NC}" >&2
-    echo "ローマ字の名前を --name で渡してください（例: --name ueda）。一度渡せば次からは省略できます。" >&2
+    echo "ローマ字の名前を --name で渡してください（例: --name taro）。一度渡せば次からは省略できます。" >&2
     exit 1
 fi
 

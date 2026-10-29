@@ -10,6 +10,23 @@
 - **毎回きれいな図解ができる** — テンプレートと模範回答をもとに、安定した品質で生成されます
 - **スマホでも見やすい** — 画面サイズに合わせてレイアウトが自動で調整されます
 
+## 受け取り方（最初に 1 回）
+
+この道具を、GitHub から自分のパソコンに写します（これを「clone」と言います）。いちばん簡単なのは、ふだん使っている AI のチャット欄に次の文を貼るやり方です。
+
+```text
+https://github.com/pon3yamada/shared-diagram-tool.git を ~/shared-diagram-tool に clone してください。
+```
+
+自分で打つときは、**ターミナル**（文字でパソコンに指示するアプリ。Mac は「ターミナル」、Windows は「PowerShell」）を開いて、次を打ちます。
+
+```bash
+git clone https://github.com/pon3yamada/shared-diagram-tool.git ~/shared-diagram-tool
+```
+
+- 「git が見つからない」と言われたら、Git（ファイルの変更を記録する道具）がまだ入っていません。AI に「Git を入れたい」と頼んでください
+- 新しい版を取り込むとき: AI に「~/shared-diagram-tool を pull して」と頼むか、ターミナルで `git -C ~/shared-diagram-tool pull` と打ちます
+
 ## まず見てみる
 
 `output/sample/` フォルダにお手本の図解が 3 つ入っています。
@@ -65,24 +82,11 @@ AI が図解を作り、`output/` フォルダに保存します。
 
 資料を渡したときは、AI はウェブ検索よりその資料を優先します。
 
-## 受け取り方（clone）
-
-```bash
-git clone https://github.com/pon3yamada/shared-diagram-tool.git ~/shared-diagram-tool
-cd ~/shared-diagram-tool
-```
-
-更新を取り込むとき（`~/shared-diagram-tool` の中で）:
-
-```bash
-git pull
-```
-
 ## 図解を共有するには
 
 ### PDF で共有する（おすすめ・準備不要）
 
-図解ページの下部にある「PDF でダウンロード」ボタンを押すと、印刷画面が開きます。
+図解ページの右上にある「PDF」ボタンを押すと、印刷画面が開きます。
 保存先を「PDF」にすれば、そのままファイルとして保存できます。
 
 ### URL で共有する
@@ -111,7 +115,7 @@ git pull
 公開 URL は次の形になります:
 
 ```text
-https://diagram-git-ueda-k3x9.surge.sh
+https://diagram-git-taro-k3x9.surge.sh
         └ 図の題名 └ 名前 └ ランダムな 4 文字
 ```
 

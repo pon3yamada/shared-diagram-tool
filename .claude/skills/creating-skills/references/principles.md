@@ -106,7 +106,7 @@ descriptionの書き方・良い例・悪い例 → [exemplar.md](exemplar.md)�
 
 ### コード作成時の規約
 
-- **TypeScript**: Bun で実行。`pnpm` スクリプト経由で呼び出す（直接実行禁止）
+- **TypeScript**（例）: 実行のしかた（例: Bun・pnpm のスクリプト経由）をリポの決まりにそろえる
 - **Bash**: 標準Unixツールのみ。`bash path/to/script.sh` で実行
 - SKILL.md にはスクリプトの**目的・実行方法・出力**を記載（実装詳細は書かない）
 

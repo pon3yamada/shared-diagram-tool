@@ -22,13 +22,13 @@ echo '<html></html>' > "$WORK/output/git.html"
 ROOT="$PWD"
 (
     cd "$WORK" || exit 1
-    out="$(bash "$ROOT/$DEPLOY" output/git.html --name "Ueda" --dry-run)" || { echo "NG: dry-run が失敗した" >&2; exit 1; }
-    echo "$out" | grep -qE 'https://diagram-git-ueda-[a-z0-9]{4}\.surge\.sh$' || { echo "NG: URL の形が違う: $out" >&2; exit 1; }
+    out="$(bash "$ROOT/$DEPLOY" output/git.html --name "Taro" --dry-run)" || { echo "NG: dry-run が失敗した" >&2; exit 1; }
+    echo "$out" | grep -qE 'https://diagram-git-taro-[a-z0-9]{4}\.surge\.sh$' || { echo "NG: URL の形が違う: $out" >&2; exit 1; }
     [ ! -e .diagram-tool ] || { echo "NG: dry-run なのに .diagram-tool を作った" >&2; exit 1; }
-    mkdir .diagram-tool && echo ueda > .diagram-tool/name
-    printf 'git\tdiagram-git-ueda-k3x9.surge.sh\n' > .diagram-tool/domains.tsv
+    mkdir .diagram-tool && echo taro > .diagram-tool/name
+    printf 'git\tdiagram-git-taro-k3x9.surge.sh\n' > .diagram-tool/domains.tsv
     out="$(bash "$ROOT/$DEPLOY" output/git.html --dry-run)"
-    echo "$out" | grep -qF 'https://diagram-git-ueda-k3x9.surge.sh' || { echo "NG: 同じ図なのに URL を使い回していない: $out" >&2; exit 1; }
+    echo "$out" | grep -qF 'https://diagram-git-taro-k3x9.surge.sh' || { echo "NG: 同じ図なのに URL を使い回していない: $out" >&2; exit 1; }
     out="$(bash "$ROOT/$DEPLOY" output/git.html --new-url --dry-run)"
     echo "$out" | grep -qF 'k3x9' && { echo "NG: --new-url なのに同じ URL: $out" >&2; exit 1; }
     bash "$ROOT/$DEPLOY" output/git.html --name 名前 --dry-run >/dev/null 2>&1 && { echo "NG: ローマ字でない名前を通した" >&2; exit 1; }

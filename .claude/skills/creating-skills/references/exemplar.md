@@ -147,7 +147,7 @@ description: Cursorフックを一時的に無効化/有効化するスキル。
 
 # Hooks Toggle
 
-Cursor hooks と SDK hooks を同時に無効化/有効化する。
+エディタのフックと自動チェックのフックを、同時に無効化/有効化する。
 
 ## 仕組み
 
@@ -168,8 +168,8 @@ bash .claude/skills/hooks-toggle/scripts/toggle-hooks.sh
 
 ## 依存
 
-- `.cursor/hooks/on-quiz-edit.ts` - スキップ判定ロジック
-- `drill/tools/quiz-viewer/server/hooks/index.ts` - スキップ判定ロジック
+- `scripts/check-before-save.sh` - スキップ判定ロジック
+- `tools/validator/index.ts` - スキップ判定ロジック
 ```
 
 **ポイント**:
